@@ -1,28 +1,23 @@
 import requests
 
+# ввод номера персонажа
+number = input("Введите номер персонажа: ")
 
-a = input("Введите широту: ")
-b = input("Введите долготу: ")
 
-
-api_url = "https://api.open-meteo.com/v1/forecast?latitude=" + a + "&longitude=" + b + "&current=temperature_2m,wind_speed_10m"
+api_url = "https://anapioficeandfire.com/api/characters/" + number
 
 response = requests.get(api_url)   # Отправляем GET-запрос и сохраняем ответ в переменной response
 
-#cTime = result["time"]
-#temperature = response["temperature_2m"]
-#windSpeed = response["wind_speed_10m"]
-
 if response.status_code == 200:    # Если код ответа на запрос - 200, то смотрим, что пришло в ответе
     response_dict = response.json()
-    result_data = response_dict["current"]
+    result_data = response_dict
 
-    cTime = result_data["time"]
-    temperature = result_data["temperature_2m"]
-    windSpeed = result_data["wind_speed_10m"]
+    name = result_data["name"]
+    culture = result_data["culture"]
+    born = result_data["born"]
 
-    print("Время: ", cTime)
-    print("Температура: ", temperature, "°C")
-    print("Скорость ветра: ", windSpeed, "km/h")
+    print("Имя: ", name)
+    print("Культура: ", culture)
+    print("Дата рождения: ", born)
 else:
     print(response.status_code)
