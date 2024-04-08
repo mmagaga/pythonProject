@@ -1,6 +1,7 @@
 import requests
 
 # ввод номера персонажа
+
 number = input("Введите номер персонажа: ")
 
 
@@ -15,9 +16,11 @@ if response.status_code == 200:    # Если код ответа на запр�
     name = result_data["name"]
     culture = result_data["culture"]
     born = result_data["born"]
+    actor = result_data["playedBy"]
 
     print("Имя: ", name)
     print("Культура: ", culture)
     print("Дата рождения: ", born)
+    print("Актёр в сериале:", actor)
 else:
     print(response.status_code)
